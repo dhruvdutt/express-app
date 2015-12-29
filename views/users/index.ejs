@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container">
+  </br></br>
+  <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target=".bs-example-modal-lg">New User</button>
+
+<div id="newUserModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog" role="document" ng-controller="UserController">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="new.name">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" name"age" placeholder="Enter Age" ng-model="new.age">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="createUser(new)" data-dismiss="modal">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+ 	<div ng-controller="UserController" ng-init="getUsers()">
+              <div class="col xs-12 col-sm-4 text center">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="searchUser" placeholder="Search for User">                  
+                </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                <tbody>
+                  <tr ng-repeat="user in users | filter:searchUser">
+                    <td ng-bind="user._id"></td>
+                    <td ng-hide="edit" ng-bind="user.name"></td>
+                    <td ng-hide="edit" ng-bind="user.age"></td>
+                    <td ng-show="edit"><input type="text" class="form-control" ng-model="data.name" ng-value="user.name"></td>
+                    <td ng-show="edit"><input type="number" class="form-control" ng-model="data.age" ng-value="user.age"></td>
+                    <td ng-show="edit"><button class="btn btn-primary" ng-click="updateUser(user._id,data)">Update</button></td>
+                    <td><input type="checkbox" ng-model="edit">Edit</td>
+                    <td><button class="btn btn-danger" ng-click="deleteUser(user._id)">Delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+
+      
+            </div>
+
+ <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/angular.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+
+<!--Controllers-->
+<script type="text/javascript" src="/js/controllers/UserController.js"></script>
+
+</body>
+</html>
