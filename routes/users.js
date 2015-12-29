@@ -35,23 +35,17 @@ router.route('/')
     })
     .post(function(req, res) {
         var name = req.body.name;
-        var age = req.body.age;
-        var dob = req.body.dob;
+        var position = req.body.position;
 
         mongoose.model('User').create({
             name : name,
-            age : age,
-            dob : dob
+            position : position
         }, function (err, user) {
               if (err) {
                   res.send("Locho!");
               } else {
                   console.log('Success POST ' + user);
                   res.format({
-                    html: function(){
-                        res.location("users");
-                        res.redirect("/users");
-                    },
                     json: function(){
                         res.json(user);
                     }
@@ -73,11 +67,8 @@ router.param('id', function(req, res, next, id) {
             var err = new Error('Not Found');
             err.status = 404;
             res.format({
-                html: function(){
-                    next(err);
-                 },
                 json: function(){
-                       res.json({message : err.status  + ' ' + err});
+                       res.json({messposition : err.status  + ' ' + err});
                  }
             });
         } else {
@@ -95,15 +86,7 @@ router.route('/:id')
         console.log('GET Error ' + err);
       } else {
         console.log('GET Retrieving ID: ' + user._id);
-        var userdob = user.dob.toISOString();
-        userdob = userdob.substring(0, userdob.indexOf('T'))
         res.format({
-          html: function(){
-              res.render('users/show', {
-                "userdob" : userdob,
-                "user" : user
-              });
-          },
           json: function(){
               res.json(user);
           }
@@ -119,16 +102,7 @@ router.route('/:id/edit')
 	            console.log('GET Error ' + err);
 	        } else {
 	            console.log('GET Retrieving ID: ' + user._id);
-              var userdob = user.dob.toISOString();
-              userdob = userdob.substring(0, userdob.indexOf('T'))
 	            res.format({
-	                html: function(){
-	                       res.render('users/edit', {
-	                          title: 'User' + user._id,
-                            "userdob" : userdob,
-	                          "user" : user
-	                      });
-	                 },
 	                json: function(){
 	                       res.json(user);
 	                 }
@@ -138,24 +112,19 @@ router.route('/:id/edit')
 	})
 	.put(function(req, res) {
 	    var name = req.body.name;
-	    var age = req.body.age;
-	    var dob = req.body.dob;
+	    var position = req.body.position;
 
 	    mongoose.model('User').findById(req.id, function (err, user) {
 	        //update it
 	        user.update({
 	            name : name,
-	            age : age,
-	            dob : dob
+	            position : position
 	        }, function (err, userID) {
 	          if (err) {
 	              res.send("There was a problem updating the information to the database: " + err);
 	          } 
 	          else {
 	                  res.format({
-	                      html: function(){
-	                           res.redirect("/users/" + user._id);
-	                     },
 	                    json: function(){
 	                           res.json(user);
 	                     }
@@ -175,11 +144,8 @@ router.route('/:id/edit')
 	                } else {
 	                    console.log('DELETE removing ID: ' + user._id);
 	                    res.format({
-	                          html: function(){
-	                               res.redirect("/users");
-	                         },
 	                        json: function(){
-	                               res.json({message : 'deleted',
+	                               res.json({messposition : 'deleted',
 	                                   item : user
 	                               });
 	                         }

@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var passport = require('passport'),
+    passportLocal = require('passport-local');
+
 var db = require('./model/db'),
     user = require('./model/users');
 
@@ -16,6 +19,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

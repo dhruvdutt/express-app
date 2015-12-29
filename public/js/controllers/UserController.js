@@ -30,7 +30,6 @@ myapp.controller('UserController', function($scope,$http,config) {
           console.log(response);
             $scope.getUsers();
             location.reload();
-
       }
     ).error(
       function(data){
@@ -40,6 +39,7 @@ myapp.controller('UserController', function($scope,$http,config) {
   }
   $scope.updateUser = function(id,data){
     console.log(data.name);
+    console.log(data.position);
     $http.put(config.baseUrl+'users/'+id+'/edit',data).success(
       function(response){
           $scope.getUsers();

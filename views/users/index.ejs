@@ -25,8 +25,8 @@
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="new.name">
           </div>
           <div class="form-group">
-            <label for="age">Age</label>
-            <input type="number" class="form-control" id="age" name"age" placeholder="Enter Age" ng-model="new.age">
+            <label for="position">Position</label>
+            <input type="text" class="form-control" id="position" name"position" placeholder="Enter position" ng-model="new.position">
           </div>
         </form>
       </div>
@@ -48,14 +48,14 @@
                 <thead>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Age</th>
+                  <th>Position</th>
                 <tbody>
                   <tr ng-repeat="user in users | filter:searchUser">
                     <td ng-bind="user._id"></td>
                     <td ng-hide="edit" ng-bind="user.name"></td>
-                    <td ng-hide="edit" ng-bind="user.age"></td>
+                    <td ng-hide="edit" ng-bind="user.position"></td>
                     <td ng-show="edit"><input type="text" class="form-control" ng-model="data.name" ng-value="user.name"></td>
-                    <td ng-show="edit"><input type="number" class="form-control" ng-model="data.age" ng-value="user.age"></td>
+                    <td ng-show="edit"><input type="text" class="form-control" ng-model="data.position" ng-value="user.position"></td>
                     <td ng-show="edit"><button class="btn btn-primary" ng-click="updateUser(user._id,data)">Update</button></td>
                     <td><input type="checkbox" ng-model="edit">Edit</td>
                     <td><button class="btn btn-danger" ng-click="deleteUser(user._id)">Delete</button></td>
