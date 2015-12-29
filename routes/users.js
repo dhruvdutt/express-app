@@ -110,29 +110,29 @@ router.route('/:id/edit')
 	        }
 	    });
 	})
-	.put(function(req, res) {
-	    var name = req.body.name;
-	    var position = req.body.position;
-
-	    mongoose.model('User').findById(req.id, function (err, user) {
-	        //update it
-	        user.update({
-	            name : name,
-	            position : position
-	        }, function (err, userID) {
-	          if (err) {
-	              res.send("There was a problem updating the information to the database: " + err);
-	          } 
-	          else {
-	                  res.format({
-	                    json: function(){
-	                           res.json(user);
-	                     }
-	                  });
-	           }
-	        })
-	    });
-	})
+	 .put(function(req, res) {
+      var data = req.body;
+      mongoose.model('User').findById(req.id, function (err, user) {
+          var updatables = ['name','position'];
+          updatables.forEach(function(updatable){
+            if(data[updatable]){
+              user[updatable] = data[updatable];
+            }
+          });
+          user.save(function(err){
+            if(err){
+              console.log(err);
+            }
+            else{
+              res.format({
+                     json: function(){
+                            res.json(user);
+                      }
+                   });
+            }
+          });
+      });
+  })
 	.delete(function (req, res){
 	    mongoose.model('User').findById(req.id, function (err, user) {
 	        if (err) {

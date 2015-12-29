@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1 class="text-center text-muted"><span class="fa fa-hash"></span> Login</h1><br/>
+        <form action="/login" method="post" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Login</button>
+        </form>
+        <hr>
+        <p class="text-muted text-center">Need an account? <a href="/register">Signup</a></p>
+    </div>
+</div>
+</body>
+</html>

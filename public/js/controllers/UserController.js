@@ -63,4 +63,8 @@ myapp.controller('UserController', function($scope,$http,config) {
       }
     )
   }
+
+  $scope.logout = function(){
+    window.location.href=config.baseUrl;
+  }
 });
