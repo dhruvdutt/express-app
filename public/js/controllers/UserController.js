@@ -4,8 +4,8 @@ var myapp = angular.module('myapp', [],function($interpolateProvider) {
     });
 
 myapp.constant('config',{
-        //'baseUrl':'http://dhruvdutt.herokuapp.com/',
-        'baseUrl':'http://localhost:3000/',
+        'baseUrl':'http://dhruvdutt.herokuapp.com/',
+        //'baseUrl':'http://localhost:3000/',
     });
 
 var myapp = angular.module('myapp');
